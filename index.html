@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <main class="game">
+        
+        <div class="timer">
+            <span id="time">30</span>
+            <span class="label">TIME</span>
+        </div>
+
+        <input
+            id="typing-input"
+            type="text"
+            placeholder="Type here..."
+            autocomplete="off"
+            spellcheck="false"
+            disabled
+        >
+
+        <div class="scores">
+            <p>Score: <span id="score">0</span></p>
+            <p>Best: <span id="best">0</span></p>
+        </div>
+
+        <p id="result" class="result" hidden></p>
+
+        <button id="play-btn" type="button">PLAY</button>
+    </main>
+</body>
+</html>
