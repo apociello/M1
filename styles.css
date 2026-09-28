@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    background: #fff;
+    width: 650px;
+    max-width: 700px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#time {
+    display: block;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+#typing-input {
+    width: 100%;
+    padding: 0.7rem;
+    margin: 2rem 0;
+    font-size: 1rem;
+}
+
+.scores {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#play-btn {
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    margin-top: 2rem;
+    cursor: pointer;
+}
