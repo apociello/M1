@@ -15,6 +15,7 @@ let currentPhrase = '';
 let timeLeft = 30;
 let timerId = null;
 let bestScore = 0;
+let gameActive = false;
 
 function pickRandomPhrase() {
   const index = Math.floor(Math.random() * phrases.length);
@@ -31,16 +32,47 @@ function renderPhrase(phrase) {
   }
 }
 
-function startGame() {
+function prepareRound() {
   currentPhrase = pickRandomPhrase();
   renderPhrase(currentPhrase);
+
+  clearInterval(timerId);
+  timeLeft = 30;
+  timeDisplay.textContent = timeLeft;
+
+  scoreDisplay.textContent = 0;
+  gameActive = false;
 
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
-  scoreDisplay.textContent = 0;
 
-  startTimer();
+  playButton.hidden = true;
+}
+
+function startTimer() {
+  timerId = setInterval(() => {
+    timeLeft--;
+    timeDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(timerId);
+  typingInput.disabled = true;
+
+  const finalScore = Number(scoreDisplay.textContent);
+
+  if (finalScore > bestScore) {
+    bestScore = finalScore;
+    bestDisplay.textContent = bestScore;
+  }
+
+  playButton.hidden = false;
 }
 
 function updateFeedback() {
@@ -68,34 +100,15 @@ function updateFeedback() {
   scoreDisplay.textContent = correctCount;
 }
 
-function startTimer() {
-  clearInterval(timerId);
-  timeLeft = 30;
-  timeDisplay.textContent = timeLeft;
-
-  timerId = setInterval(() => {
-    timeLeft--;
-    timeDisplay.textContent = timeLeft;
-
-    if (timeLeft <= 0) {
-      endGame();
-    }
-  }, 1000);
-}
-
-function endGame() {
-  clearInterval(timerId);
-  typingInput.disabled = true;
-
-  const finalScore = Number(scoreDisplay.textContent);
-
-  if (finalScore > bestScore) {
-    bestScore = finalScore;
-    bestDisplay.textContent = bestScore;
+typingInput.addEventListener('input', () => {
+  if (!gameActive) {
+    gameActive = true;
+    startTimer();
   }
 
-  playButton.textContent = 'PLAY AGAIN';
-}
+  updateFeedback();
+});
 
-playButton.addEventListener('click', startGame);
-typingInput.addEventListener('input', updateFeedback);
+playButton.addEventListener('click', prepareRound);
+
+prepareRound();
