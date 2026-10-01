@@ -61,3 +61,12 @@ body {
   margin-top: 2rem;
   cursor: pointer;
 }
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+  background: #fde2e2;
+}

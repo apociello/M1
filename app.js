@@ -38,4 +38,30 @@ function startGame() {
   typingInput.focus();
 }
 
+function updateFeedback() {
+    const typedText = typingInput.value;
+    const characterSpans = phraseDisplay.querySelectorAll("span");
+
+    let correctCount = 0;
+
+    characterSpans.forEach((span, index) => {
+        const typedCharacter = typedText[index];
+
+        if (typedCharacter === undefined) {
+            span.className = "";
+            return;
+        }
+
+        if (typedCharacter === span.textContent) {
+            span.className = "correct";
+            correctCount++;
+        } else {
+            span.className = "incorrect";
+        }
+    });
+
+    scoreDisplay.textContent = correctCount;
+}
+
 playButton.addEventListener('click', startGame);
+typingInput.addEventListener("input", updateFeedback);
