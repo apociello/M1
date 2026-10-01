@@ -3,7 +3,6 @@ const phraseDisplay = document.querySelector('#phrase');
 const typingInput = document.querySelector('#typing-input');
 const scoreDisplay = document.querySelector('#score');
 const bestDisplay = document.querySelector('#best');
-const resultMessage = document.querySelector('#result');
 const playButton = document.querySelector('#play-btn');
 
 const phrases = [
@@ -13,6 +12,9 @@ const phrases = [
 ];
 
 let currentPhrase = '';
+let timeLeft = 30;
+let timerId = null;
+let bestScore = 0;
 
 function pickRandomPhrase() {
   const index = Math.floor(Math.random() * phrases.length);
@@ -36,32 +38,64 @@ function startGame() {
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
+  scoreDisplay.textContent = 0;
+
+  startTimer();
 }
 
 function updateFeedback() {
-    const typedText = typingInput.value;
-    const characterSpans = phraseDisplay.querySelectorAll("span");
+  const typedText = typingInput.value;
+  const characterSpans = phraseDisplay.querySelectorAll('span');
 
-    let correctCount = 0;
+  let correctCount = 0;
 
-    characterSpans.forEach((span, index) => {
-        const typedCharacter = typedText[index];
+  characterSpans.forEach((span, index) => {
+    const typedCharacter = typedText[index];
 
-        if (typedCharacter === undefined) {
-            span.className = "";
-            return;
-        }
+    if (typedCharacter === undefined) {
+      span.className = '';
+      return;
+    }
 
-        if (typedCharacter === span.textContent) {
-            span.className = "correct";
-            correctCount++;
-        } else {
-            span.className = "incorrect";
-        }
-    });
+    if (typedCharacter === span.textContent) {
+      span.className = 'correct';
+      correctCount++;
+    } else {
+      span.className = 'incorrect';
+    }
+  });
 
-    scoreDisplay.textContent = correctCount;
+  scoreDisplay.textContent = correctCount;
+}
+
+function startTimer() {
+  clearInterval(timerId);
+  timeLeft = 30;
+  timeDisplay.textContent = timeLeft;
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    timeDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(timerId);
+  typingInput.disabled = true;
+
+  const finalScore = Number(scoreDisplay.textContent);
+
+  if (finalScore > bestScore) {
+    bestScore = finalScore;
+    bestDisplay.textContent = bestScore;
+  }
+
+  playButton.textContent = 'PLAY AGAIN';
 }
 
 playButton.addEventListener('click', startGame);
-typingInput.addEventListener("input", updateFeedback);
+typingInput.addEventListener('input', updateFeedback);
