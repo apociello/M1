@@ -66,6 +66,9 @@ function endGame() {
   clearInterval(timerId);
   typingInput.disabled = true;
 
+  const cursorSpan = phraseDisplay.querySelector('.cursor');
+  if (cursorSpan) cursorSpan.classList.remove('cursor');
+  
   const finalScore = Number(scoreDisplay.textContent);
 
   if (finalScore > bestScore) {
