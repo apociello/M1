@@ -1,4 +1,3 @@
-const timeDisplay = document.querySelector('#time');
 const phraseDisplay = document.querySelector('#phrase');
 const typingInput = document.querySelector('#typing-input');
 const scoreDisplay = document.querySelector('#score');
@@ -12,7 +11,6 @@ const phrases = [
 ];
 
 let currentPhrase = '';
-let timeLeft = 30;
 let timerId = null;
 let bestScore = 0;
 let gameActive = false;
@@ -38,13 +36,11 @@ function prepareRound() {
   phraseDisplay.querySelector('span').classList.add('cursor');
 
   clearInterval(timerId);
-  timeLeft = 30;
-  timeDisplay.textContent = timeLeft;
-
   scoreDisplay.textContent = 0;
   gameActive = false;
 
   typingInput.value = '';
+  typingInput.maxLength = currentPhrase.length;
   typingInput.disabled = false;
   typingInput.focus();
 
@@ -52,14 +48,7 @@ function prepareRound() {
 }
 
 function startTimer() {
-  timerId = setInterval(() => {
-    timeLeft--;
-    timeDisplay.textContent = timeLeft;
-
-    if (timeLeft <= 0) {
-      endGame();
-    }
-  }, 1000);
+  // placeholder: aquí mediremos el tiempo cuando añadamos WPM
 }
 
 function endGame() {
@@ -68,7 +57,7 @@ function endGame() {
 
   const cursorSpan = phraseDisplay.querySelector('.cursor');
   if (cursorSpan) cursorSpan.classList.remove('cursor');
-  
+
   const finalScore = Number(scoreDisplay.textContent);
 
   if (finalScore > bestScore) {
@@ -105,6 +94,10 @@ function updateFeedback() {
   });
 
   scoreDisplay.textContent = correctCount;
+
+  if (typedText.length === currentPhrase.length) {
+    endGame();
+  }
 }
 
 typingInput.addEventListener('input', () => {
