@@ -16,8 +16,8 @@ body {
 
 .game {
   background: #fff;
-  width: 650px;
-  max-width: 700px;
+  width: 80%;
+  max-width: 850px;
   padding: 2.5rem;
   border-radius: 12px;
   text-align: center;
@@ -43,10 +43,9 @@ body {
 }
 
 #typing-input {
-  width: 100%;
-  padding: 0.7rem;
-  margin: 2rem 0;
-  font-size: 1rem;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .scores {
@@ -69,4 +68,25 @@ body {
 .incorrect {
   color: red;
   background: #fde2e2;
+}
+
+.cursor {
+  position: relative;
+}
+
+.cursor::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #222;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }

@@ -35,6 +35,7 @@ function renderPhrase(phrase) {
 function prepareRound() {
   currentPhrase = pickRandomPhrase();
   renderPhrase(currentPhrase);
+  phraseDisplay.querySelector('span').classList.add('cursor');
 
   clearInterval(timerId);
   timeLeft = 30;
@@ -84,16 +85,19 @@ function updateFeedback() {
   characterSpans.forEach((span, index) => {
     const typedCharacter = typedText[index];
 
+    span.classList.remove('cursor');
+
     if (typedCharacter === undefined) {
       span.className = '';
-      return;
-    }
-
-    if (typedCharacter === span.textContent) {
+    } else if (typedCharacter === span.textContent) {
       span.className = 'correct';
       correctCount++;
     } else {
       span.className = 'incorrect';
+    }
+
+    if (index === typedText.length) {
+      span.classList.add('cursor');
     }
   });
 
@@ -110,5 +114,9 @@ typingInput.addEventListener('input', () => {
 });
 
 playButton.addEventListener('click', prepareRound);
+
+phraseDisplay.addEventListener('click', () => {
+  typingInput.focus();
+});
 
 prepareRound();
