@@ -1,3 +1,15 @@
+:root {
+  --bg-color: #f4f4f4;
+  --text-color: #222;
+  --card-bg: #fff;
+}
+
+.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #e4e4e4;
+  --card-bg: #2b2b2b;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,8 +18,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #f4f4f4;
-  color: #222;
+  background: var(--bg-color);
+  color: var(--text-color);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,7 +27,7 @@ body {
 }
 
 .game {
-  background: #fff;
+  background: var(--card-bg);
   width: 80%;
   max-width: 850px;
   padding: 2.5rem;
@@ -70,7 +82,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #222;
+  background: var(--text-color);
   animation: blink 1s step-end infinite;
 }
 

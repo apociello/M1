@@ -129,4 +129,10 @@ phraseDisplay.addEventListener('click', () => {
   typingInput.focus();
 });
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    document.body.classList.toggle('dark');
+  }
+});
+
 prepareRound();
