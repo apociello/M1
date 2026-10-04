@@ -35,7 +35,7 @@ body {
   text-align: center;
 }
 
-.phrase {
+#phrase {
   font-family: monospace;
   font-size: 1.2rem;
   line-height: 1.6;
@@ -56,10 +56,22 @@ body {
 }
 
 #play-btn {
-  padding: 0.7rem 2rem;
-  font-size: 1rem;
+  padding: 0.65rem 1.25rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: #323232;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
   margin-top: 2rem;
   cursor: pointer;
+}
+
+.dark #play-btn {
+  color: #1e1e1e;
+  background: #e4e4e4;
+  border-color: #e4e4e4;
 }
 
 .correct {
