@@ -117,7 +117,12 @@ function updateFeedback() {
 }
 
 typingInput.addEventListener('input', () => {
-  if (!gameActive) {
+  if (typingInput.value.length === 0) {
+    gameActive = false;
+    clearInterval(timerId);
+    currentWpm = 0;
+    scoreDisplay.textContent = 0;
+  } else if (!gameActive) {
     gameActive = true;
     startTimer();
   }
