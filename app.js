@@ -16,6 +16,7 @@ let bestScore = 0;
 let gameActive = false;
 let startTime = 0;
 let correctCount = 0;
+let characterSpans = [];
 
 function pickRandomPhrase() {
   const index = Math.floor(Math.random() * phrases.length);
@@ -30,6 +31,8 @@ function renderPhrase(phrase) {
     span.textContent = character;
     phraseDisplay.appendChild(span);
   }
+
+  characterSpans = phraseDisplay.querySelectorAll('span');
 }
 
 function calculateWpm() {
@@ -84,7 +87,6 @@ function endGame() {
 
 function updateFeedback() {
   const typedText = typingInput.value;
-  const characterSpans = phraseDisplay.querySelectorAll('span');
 
   correctCount = 0;
 
