@@ -2,12 +2,18 @@
   --bg-color: #f4f4f4;
   --text-color: #222;
   --card-bg: #fff;
+  --btn-bg: #323232;
+  --btn-text: #fff;
+  --btn-border: #4a4a4a;
 }
 
 .dark {
   --bg-color: #1e1e1e;
   --text-color: #e4e4e4;
   --card-bg: #2b2b2b;
+  --btn-bg: #e4e4e4;
+  --btn-text: #1e1e1e;
+  --btn-border: #e4e4e4;
 }
 
 * {
@@ -60,18 +66,12 @@ body {
   font: inherit;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fff;
-  background: #323232;
-  border: 1px solid #4a4a4a;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
   border-radius: 6px;
   margin-top: 2rem;
   cursor: pointer;
-}
-
-.dark #play-btn {
-  color: #1e1e1e;
-  background: #e4e4e4;
-  border-color: #e4e4e4;
 }
 
 .correct {
