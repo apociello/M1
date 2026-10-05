@@ -17,6 +17,7 @@ let gameActive = false;
 let startTime = 0;
 let correctCount = 0;
 let characterSpans = [];
+let currentWpm = 0;
 
 function pickRandomPhrase() {
   const index = Math.floor(Math.random() * phrases.length);
@@ -49,6 +50,7 @@ function prepareRound() {
 
   clearInterval(timerId);
   correctCount = 0;
+  currentWpm = 0;
   scoreDisplay.textContent = 0;
   gameActive = false;
 
@@ -64,7 +66,8 @@ function startTimer() {
   startTime = Date.now();
 
   timerId = setInterval(() => {
-    scoreDisplay.textContent = calculateWpm();
+    currentWpm = calculateWpm();
+    scoreDisplay.textContent = currentWpm;
   }, 1000);
 }
 
@@ -75,10 +78,8 @@ function endGame() {
   const cursorSpan = phraseDisplay.querySelector('.cursor');
   if (cursorSpan) cursorSpan.classList.remove('cursor');
 
-  const finalScore = Number(scoreDisplay.textContent);
-
-  if (finalScore > bestScore) {
-    bestScore = finalScore;
+  if (currentWpm > bestScore) {
+    bestScore = currentWpm;
     bestDisplay.textContent = bestScore;
   }
 
@@ -107,7 +108,8 @@ function updateFeedback() {
     }
   });
 
-  scoreDisplay.textContent = calculateWpm();
+  currentWpm = calculateWpm();
+  scoreDisplay.textContent = currentWpm;
 
   if (typedText.length === currentPhrase.length) {
     endGame();
