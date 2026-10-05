@@ -93,8 +93,6 @@ function updateFeedback() {
   characterSpans.forEach((span, index) => {
     const typedCharacter = typedText[index];
 
-    span.classList.remove('cursor');
-
     if (typedCharacter === undefined) {
       span.className = '';
     } else if (typedCharacter === span.textContent) {
