@@ -93,13 +93,13 @@ function updateFeedback() {
   characterSpans.forEach((span, index) => {
     const typedCharacter = typedText[index];
 
-    if (typedCharacter === undefined) {
-      span.className = '';
-    } else if (typedCharacter === span.textContent) {
-      span.className = 'correct';
+    span.classList.remove('correct', 'incorrect', 'cursor');
+
+    if (typedCharacter === span.textContent) {
+      span.classList.add('correct');
       correctCount++;
-    } else {
-      span.className = 'incorrect';
+    } else if (typedCharacter !== undefined) {
+      span.classList.add('incorrect');
     }
 
     if (index === typedText.length) {
