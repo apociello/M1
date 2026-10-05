@@ -6,10 +6,11 @@ A typing speed game built with vanilla HTML, CSS and JavaScript.
 
 ## Features
 
+- 8 different typing phrases
 - Type directly over the phrase, no visible input box
 - Real-time character feedback (correct/incorrect)
 - Live WPM calculation
-- Best score tracking per session
+- Best score saved between sessions with localStorage
 - Secret dark mode toggle
 
 ## Built with
