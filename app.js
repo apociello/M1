@@ -8,6 +8,11 @@ const phrases = [
   'The quick brown fox jumps over the lazy dog while the sun sets slowly behind the distant mountains and the cold wind carries the smell of rain across the quiet empty valley below.',
   'Programming is the art of telling another human what one wants the computer to do, and every good programmer knows that clear code is written for people first and machines second.',
   'During that long summer night the streets of the city were almost empty, and the only sound was the distant music drifting from an open window on the top floor of an old building.',
+  'Every morning the small coffee shop opened its doors before sunrise, filling the quiet street with the smell of fresh bread and freshly brewed coffee.',
+  'The old train moved slowly through the countryside while passengers watched the green fields, distant houses, and cloudy sky through the windows.',
+  'Learning to type quickly takes patience and practice, but with enough repetition your fingers begin to remember the position of every key without thinking.',
+  'A sudden storm arrived in the afternoon, covering the streets with rain while people hurried home and the sound of thunder echoed between the buildings.',
+  'The museum was almost empty that evening, giving visitors plenty of time to explore the paintings and discover small details hidden in every room.',
 ];
 
 let currentPhrase = '';
@@ -138,7 +143,7 @@ phraseDisplay.addEventListener('click', () => {
 
 document.addEventListener('keydown', (event) => {
   if (event.ctrlKey && event.key === 'd') {
-    event.preventDefault();   // prevent browser default
+    event.preventDefault(); // prevent browser default
     document.body.classList.toggle('dark');
   }
 });
