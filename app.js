@@ -17,12 +17,14 @@ const phrases = [
 
 let currentPhrase = '';
 let timerId = null;
-let bestScore = 0;
+let bestScore = Number(localStorage.getItem('bestScore')) || 0;
 let gameActive = false;
 let startTime = 0;
 let correctCount = 0;
 let characterSpans = [];
 let currentWpm = 0;
+
+bestDisplay.textContent = bestScore;
 
 function pickRandomPhrase() {
   const index = Math.floor(Math.random() * phrases.length);
@@ -43,6 +45,7 @@ function renderPhrase(phrase) {
 
 function calculateWpm() {
   const elapsedSeconds = (Date.now() - startTime) / 1000;
+
   return elapsedSeconds > 0
     ? Math.round(correctCount / 5 / (elapsedSeconds / 60))
     : 0;
@@ -54,8 +57,10 @@ function prepareRound() {
   phraseDisplay.querySelector('span').classList.add('cursor');
 
   clearInterval(timerId);
+
   correctCount = 0;
   currentWpm = 0;
+
   scoreDisplay.textContent = 0;
   gameActive = false;
 
@@ -81,11 +86,15 @@ function endGame() {
   typingInput.disabled = true;
 
   const cursorSpan = phraseDisplay.querySelector('.cursor');
-  if (cursorSpan) cursorSpan.classList.remove('cursor');
+
+  if (cursorSpan) {
+    cursorSpan.classList.remove('cursor');
+  }
 
   if (currentWpm > bestScore) {
     bestScore = currentWpm;
     bestDisplay.textContent = bestScore;
+    localStorage.setItem('bestScore', bestScore);
   }
 
   playButton.hidden = false;
@@ -143,7 +152,7 @@ phraseDisplay.addEventListener('click', () => {
 
 document.addEventListener('keydown', (event) => {
   if (event.ctrlKey && event.key === 'd') {
-    event.preventDefault(); // prevent browser default
+    event.preventDefault();
     document.body.classList.toggle('dark');
   }
 });
