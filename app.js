@@ -137,7 +137,8 @@ phraseDisplay.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
+  if (event.ctrlKey && event.key === 'd') {
+    event.preventDefault();   // prevent browser default
     document.body.classList.toggle('dark');
   }
 });
